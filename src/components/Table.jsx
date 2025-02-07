@@ -1,7 +1,10 @@
 import { useWasteData } from '../hooks/useWasteData'
+import { useState } from 'react'
 
 function Table () {
   const { tableData: wasteData, isLoading, error } = useWasteData()
+  const [currentPage, setCurrentPage] = useState(1)
+  const rowsPerPage = 10
 
   const formatTime = timestamp => {
     return new Date(timestamp).toLocaleTimeString('en-US', {
@@ -16,6 +19,17 @@ function Table () {
     Plastic: 'bg-blue-400',
     Other: 'bg-red-400'
   }
+
+  const handleNextPage = () => {
+    setCurrentPage(prevPage => prevPage + 1)
+  }
+
+  const handlePreviousPage = () => {
+    setCurrentPage(prevPage => Math.max(prevPage - 1, 1))
+  }
+
+  const startIndex = (currentPage - 1) * rowsPerPage
+  const currentData = wasteData.slice(startIndex, startIndex + rowsPerPage)
 
   return (
     <div className='relative overflow-hidden rounded-sm shadow-md bg-white mt-7'>
@@ -49,7 +63,7 @@ function Table () {
                 </td>
               </tr>
             ) : (
-              wasteData.map((row, index) => (
+              currentData.map((row, index) => (
                 <tr
                   key={index}
                   className='bg-white border-b-1 border-slate-200 hover:bg-gray-50 dark:hover:bg-slate-200'
@@ -73,6 +87,22 @@ function Table () {
             )}
           </tbody>
         </table>
+      </div>
+      <div className='flex justify-between p-4'>
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          className='px-4 py-2 bg-gray-200 rounded disabled:opacity-50'
+        >
+          Previous
+        </button>
+        <button
+          onClick={handleNextPage}
+          disabled={startIndex + rowsPerPage >= wasteData.length}
+          className='px-4 py-2 bg-gray-200 rounded disabled:opacity-50'
+        >
+          Next
+        </button>
       </div>
     </div>
   )
