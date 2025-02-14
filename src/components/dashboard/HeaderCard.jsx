@@ -1,4 +1,4 @@
-import { useWasteData } from '../hooks/useWasteData'
+import { useWasteData } from '../../hooks/useWasteData'
 
 function HeaderCard () {
   const { totalBins, totalWaste, commonWaste, filledBins, isLoading } = useWasteData()

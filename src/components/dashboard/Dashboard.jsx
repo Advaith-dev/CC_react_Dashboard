@@ -1,5 +1,5 @@
 import Navbar from './Navbar.jsx'
-import Maps from './Map2.jsx'
+import Maps from './Map.jsx'
 import HeaderCard from './HeaderCard.jsx'
 import PieChart from './PieChart.jsx'
 import Table from './Table.jsx'

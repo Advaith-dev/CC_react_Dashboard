@@ -1,6 +1,6 @@
-import { useWasteData } from '../hooks/useWasteData';
+import { useWasteData } from '../../hooks/useWasteData';
 import { useState, useEffect } from 'react';
-import '../index.css';
+import '../../components/styles/index.css';
 
 function Toast() {
   const { newHighFillBins } = useWasteData();

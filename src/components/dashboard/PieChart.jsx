@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useWasteData } from '../hooks/useWasteData'
+import { useWasteData } from '../../hooks/useWasteData'
 
 function PieChart () {
   const chartRef = useRef(null)

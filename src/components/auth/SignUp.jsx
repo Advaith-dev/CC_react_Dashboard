@@ -7,15 +7,40 @@ function SignUp () {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
+    confirm_password: ''
   })
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  // Function to check password strength
+  function isPasswordStrong(password) {
+    // Check for minimum length, presence of uppercase letters, lowercase letters, numbers, and special characters
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+
+    return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setIsLoading(true)
+
+    if (formData.password !== formData.confirm_password) {
+      setError('Passwords do not match')
+      setIsLoading(false)
+      return
+    }
+
+    if (isPasswordStrong(formData.password) === false) {
+      setError('Use a strong password (minimum 8 characters with uppercase, lowercase, number, and special character)')
+      setIsLoading(false)
+      return
+    }
+
     try {
       await createUserWithEmailAndPassword(
         auth,
@@ -102,6 +127,29 @@ function SignUp () {
               />
             </div>
 
+            {/* Confirm Password Field */}
+            <div>
+              <label
+                htmlFor='confirm_password'
+                className='block text-sm font-medium text-gray-700 dark:text-gray-300'
+              >
+                Confirm Password
+              </label>
+              <input
+                id='confirm_password'
+                type='password'
+                required
+                className='mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-sm text-sm shadow-sm placeholder-gray-400
+                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
+                dark:text-gray-300'
+                placeholder='Confirm your password'
+                value={formData.confirm_password}
+                onChange={e =>
+                  setFormData({ ...formData, confirm_password: e.target.value })
+                }
+              />
+            </div>
+
             {/* Submit Button */}
             <button
               type='submit'
@@ -153,7 +201,7 @@ function SignUp () {
             <p className='text-sm text-gray-600 dark:text-gray-400'>
               Already have an account?{' '}
               <a
-                onClick={() => navigate('/signIn')}
+                onClick={() => navigate('/')}
                 className='font-medium text-blue-500 hover:text-blue-400 cursor-pointer'
               >
                 Sign In
