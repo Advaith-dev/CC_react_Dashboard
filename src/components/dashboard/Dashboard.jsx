@@ -1,9 +1,10 @@
 import Navbar from './Navbar.jsx'
-import Maps from './Map.jsx'
+import Maps from './Map2.jsx'
 import HeaderCard from './HeaderCard.jsx'
 import PieChart from './PieChart.jsx'
 import Table from './Table.jsx'
 import Toast from './Toast.jsx'
+import Qr from '../Qr.jsx'
 
 function Dashboard () {
   return (

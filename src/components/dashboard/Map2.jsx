@@ -32,6 +32,7 @@ const Maps = () => {
         const response = await fetch('http://localhost:3001/api/location')
         const data = await response.json()
         setMarkerLocations(data)
+        console.log('Successfully retrived data')
       } catch (error) {
         console.error('Error fetching marker data:', error)
       }
@@ -107,9 +108,18 @@ const Maps = () => {
         }
       })
       const getMarkerColor = fillLevel => {
-        if (fillLevel > 80) return 'red'
-        if (fillLevel > 50) return 'orange'
-        return 'green'
+        console.log(fillLevel)
+        if (fillLevel > 80) {
+          console.log('RED')
+          return 'red'
+        }
+        if (fillLevel > 50) {
+          console.log('ORAGNGE')
+          return 'orange'
+        } else {
+          console.log('GREEN')
+          return 'green'
+        }
       }
       // Add new markers from MongoDB data
       markerLocations.forEach(location => {

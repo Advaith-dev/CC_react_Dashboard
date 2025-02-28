@@ -22,10 +22,11 @@ function Navbar () {
   }
 
   const handleSignOut = () => {
-    window.location.href = '/';
-    // setIsDropdownOpen(false);
-    // navigate('/');
-  };
+    window.location.href = '/'
+  }
+  const handlleQR = () => {
+    window.location.href = '/qrcode'
+  }
 
   return (
     <nav className='bg-teal-950 border-gray-200 w-full'>
@@ -34,7 +35,9 @@ function Navbar () {
           <span className='text-2xl font-semibold text-white'>Cashcrow</span>
         </a>
         <div className='relative' ref={dropdownRef}>
-          <button onClick={toggleDropdown} type='button'
+          <button
+            onClick={toggleDropdown}
+            type='button'
             className='flex text-sm bg-teal-950 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 cursor-pointer hover:opacity-80'
           >
             <svg
@@ -55,14 +58,24 @@ function Navbar () {
 
           {isDropdownOpen && (
             <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10'>
-              <a href='#' className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'>Profile</a>
-              <a onClick={handleSignOut} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'>Sign Out</a>
-              {/* <button 
+              <a
+                href='#'
+                className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+              >
+                Profile
+              </a>
+              <a
+                onClick={handlleQR}
+                className='cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+              >
+                Add Bin
+              </a>
+              <a
                 onClick={handleSignOut}
-                className='w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                className='cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
               >
                 Sign Out
-              </button> */}
+              </a>
             </div>
           )}
         </div>

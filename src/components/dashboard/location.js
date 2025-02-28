@@ -6,6 +6,7 @@ const uri = "mongodb+srv://Advaith:Iw49EZs72V5Gpzud@wastebin.3yad3.mongodb.net/?
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 const port = 3001;  
 
 // Create a MongoClient instance (keep it open)
@@ -40,6 +41,29 @@ app.get("/api/location", async (req, res) => {
   } catch (error) {
     console.error("Error fetching wastebins:", error);
     res.status(500).json({ message: "Error fetching wastebins", error });
+  }
+});
+
+app.post("/api/write", async (req, res) => {
+  try {
+    console.log("API /api/write was hit"); 
+    const { lat, long, id, name } = req.body;
+    console.log("Incoming request body:", req.body); // Debugging log
+
+    //if (!latitude || !longitude || !id) {
+      //return res.status(400).json({ message: "Missing required fields" });
+    //}
+
+    const collection = client.db("Wastebin").collection("location");
+    const newEntry = { lat, long, id, name, timestamp: new Date() };
+
+    const result = await collection.insertOne(newEntry);
+    console.log("Inserted data:", result);
+
+    res.status(201).json({ message: "Data written successfully", data: newEntry });
+  } catch (error) {
+    console.error("Error writing wastebin data:", error);
+    res.status(500).json({ message: "Error writing wastebin data", error });
   }
 });
 
