@@ -50,12 +50,12 @@ app.post("/api/write", async (req, res) => {
     const { lat, long, id, name } = req.body;
     console.log("Incoming request body:", req.body); // Debugging log
 
-    //if (!latitude || !longitude || !id) {
-      //return res.status(400).json({ message: "Missing required fields" });
-    //}
+    if (!lat || !long || !id) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
 
     const collection = client.db("Wastebin").collection("location");
-    const newEntry = { lat, long, id, name, timestamp: new Date() };
+    const newEntry = { lat, long, id, name,status:"Active", timestamp: new Date() };
 
     const result = await collection.insertOne(newEntry);
     console.log("Inserted data:", result);

@@ -31,7 +31,7 @@ function Navbar () {
   return (
     <nav className='bg-teal-950 border-gray-200 w-full'>
       <div className='flex items-center justify-between px-6 py-4 w-full'>
-        <a href='/' className='flex items-center'>
+        <a href='/dashboard' className='flex items-center'>
           <span className='text-2xl font-semibold text-white'>Cashcrow</span>
         </a>
         <div className='relative' ref={dropdownRef}>

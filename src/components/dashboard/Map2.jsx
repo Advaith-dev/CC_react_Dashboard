@@ -139,6 +139,8 @@ const Maps = () => {
                 <div>
                   <p>Bin ID: ${location.id}</p>
                   <p>Name: ${location.name}</p>
+                 <a href="http://localhost:5173/qrcode" target="_blank">View</a>
+
                 </div>
               `)
           )
